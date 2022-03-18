@@ -46,6 +46,7 @@ function MyApp({ Component, pageProps }) {
 									fontWeight: "bold",
 									display: "block",
 								}}
+								href="/"
 							>
 								#SharkBowl
 							</Button>
@@ -55,6 +56,7 @@ function MyApp({ Component, pageProps }) {
 									fontWeight: "bold",
 									display: "block",
 								}}
+								href="/entrepreneursPortal"
 							>
 								Find Entrepreneurs
 							</Button>
@@ -109,6 +111,7 @@ function MyApp({ Component, pageProps }) {
 									fontWeight: "bold",
 									display: "block",
 								}}
+								href="/signin"
 							>
 								sign in
 							</Button>
@@ -118,6 +121,7 @@ function MyApp({ Component, pageProps }) {
 									fontWeight: "bold",
 									display: "block",
 								}}
+								href="/signup"
 							>
 								sign up
 							</Button>

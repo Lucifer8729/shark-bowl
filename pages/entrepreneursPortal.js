@@ -13,11 +13,13 @@ import CardMedia from "@mui/material/CardMedia";
 import { CardActions } from "@mui/material";
 
 export default function EntrepreneursPortal() {
+	const [data, setData] = React.useState([]);
 	React.useEffect(() => {
 		// GET request using axios inside useEffect React hook
-		axios
-			.get("http://localhost:3000/api/enform")
-			.then((response) => console.log(response.data.data));
+		axios.get("http://localhost:3000/api/enform").then((response) => {
+			setData(response.data.data);
+			// console.log(data);
+		});
 	}, []);
 
 	return (
@@ -82,7 +84,7 @@ export default function EntrepreneursPortal() {
 				container
 				rowSpacing={1}
 				columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-				sx={{ p: 4 }}
+				sx={{ pl: 4, mb: 4 }}
 			>
 				<Grid item>
 					<Grid
@@ -92,42 +94,60 @@ export default function EntrepreneursPortal() {
 						alignItems="flex-start"
 						spacing={4}
 					>
-						<Grid item>
-							<Card sx={{ maxWidth: 345 }}>
-								<CardMedia
-									component="img"
-									height="140"
-									image="/static/images/cards/contemplative-reptile.jpg"
-									alt="profile"
-								/>
-								<CardContent>
-									<Typography
-										gutterBottom
-										variant="h5"
-										component="div"
-									>
-										Lizard
-									</Typography>
-									<Typography
-										variant="body2"
-										color="text.secondary"
-									>
-										Lorem Ipsum is simply dummy text of the
-										printing and typesetting industry. Lorem
-										Ipsum has been the industrys standard
-										dummy text ever since the 1500s, when an
-										unknown printer took a galley of type
-										and scrambled it to make a type specimen
-										book.
-									</Typography>
-								</CardContent>
-								<CardActions>
-									<Button size="small" color="primary">
-										View Profile
-									</Button>
-								</CardActions>
-							</Card>
-						</Grid>
+						{data.length != 0
+							? data.map((obj) => {
+									// console.log(data);
+
+									return (
+										<Grid item key={obj._id}>
+											<Card sx={{ maxWidth: 345 }}>
+												<CardMedia
+													component="img"
+													height="140"
+													image="/static/images/cards/contemplative-reptile.jpg"
+													alt="profile"
+												/>
+												<CardContent>
+													<Typography
+														gutterBottom
+														variant="h5"
+														component="div"
+													>
+														{obj.firstName +
+															" " +
+															obj.lastName}
+													</Typography>
+													<Typography
+														variant="body2"
+														color="text.secondary"
+													>
+														Lorem Ipsum is simply
+														dummy text of the
+														printing and typesetting
+														industry. Lorem Ipsum
+														has been the industrys
+														standard dummy text ever
+														since the 1500s, when an
+														unknown printer took a
+														galley of type and
+														scrambled it to make a
+														type specimen book.
+													</Typography>
+												</CardContent>
+												<CardActions>
+													<Button
+														size="small"
+														color="primary"
+														href={`${obj._id}`}
+													>
+														View Profile
+													</Button>
+												</CardActions>
+											</Card>
+										</Grid>
+									);
+							  })
+							: null}
 					</Grid>
 				</Grid>
 			</Grid>
